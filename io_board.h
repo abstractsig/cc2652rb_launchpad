@@ -4,34 +4,42 @@
  *
  * Has:
  *
- *		MX25R8035FZUILO 8Mbit SPI flash
+ *      MX25R8035FZUILO 8Mbit SPI flash
  *
  */
 #ifndef io_board_H_
 #define io_board_H_
 #include <io_cpu.h>
 
+void io_board_panic (io_t*,int);
+
+#define SPECIALISE_IO_BOARD_IMPLEMENTATION(S) \
+    SPECIALISE_IO_CPU_IMPLEMENTATION(S) \
+	 .panic = io_board_panic,\
+    /**/
+
+
 // red LED
 #define LED_1_BOARD_PIN def_cc2652_io_output_pin (\
-		IOID_6,\
-		IO_PIN_ACTIVE_LEVEL_HIGH,\
-		IO_PIN_LEVEL_INACTIVE\
-	)
-#define LED_1	LED_1_BOARD_PIN.io
+        IOID_6,\
+        IO_PIN_ACTIVE_LEVEL_HIGH,\
+        IO_PIN_LEVEL_INACTIVE\
+    )
+#define LED_1   LED_1_BOARD_PIN.io
 
 // green LED
 #define LED_2_BOARD_PIN def_cc2652_io_output_pin (\
-		IOID_7,\
-		IO_PIN_ACTIVE_LEVEL_HIGH,\
-		IO_PIN_LEVEL_INACTIVE\
-	)
-#define LED_2	LED_2_BOARD_PIN.io
+        IOID_7,\
+        IO_PIN_ACTIVE_LEVEL_HIGH,\
+        IO_PIN_LEVEL_INACTIVE\
+    )
+#define LED_2   LED_2_BOARD_PIN.io
 
 // XDS110 UART
-#define XDS110_UART_TX_DIO		IOID_3
-#define XDS110_UART_RX_DIO		IOID_2
+#define XDS110_UART_TX_DIO      IOID_3
+#define XDS110_UART_RX_DIO      IOID_2
 
-void	initialise_board_io (io_t*);
+void    initialise_io_board (io_t*);
 
 #ifdef IMPLEMENT_IO_BOARD
 //-----------------------------------------------------------------------------
@@ -39,14 +47,19 @@ void	initialise_board_io (io_t*);
 // Implementation
 //
 //-----------------------------------------------------------------------------
+
 void
-add_io_implementation_board_methods (io_implementation_t *io_i) {
-	add_io_implementation_cpu_methods (io_i);
+initialise_io_board (io_t *io) {
+    initialise_io_cpu (io);
 }
 
 void
-initialise_board_io (io_t *io) {
-	initialise_cpu_io (io);
+io_board_panic (io_t *io,int code) {
+
+	// blink LED
+
+	DISABLE_INTERRUPTS;
+	while (1);
 }
 
 
