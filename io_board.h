@@ -2,6 +2,19 @@
  *
  * Ti cc2652rb launchpad
  *
+ *               .-----------------.                    .-----------------.
+ *               |  3V3 10 21 5V   |                    |DIO7  40 20 0V   |
+ *               |DIO23  9 22 0V   |                    |DIO6  39 19 DIO12|
+ *               |DIO2   8 23 DIO25|                    |DIO20 38 18 DIO11|
+ *               |DIO3   7 24 DIO26|                    |DIO19 37 17      |
+ *               |DIO22  6 25 DIO27|                    |DIO18 36 16      |
+ *               |DIO24  5 26 DIO28|                    |      35 15 DIO9 |
+ *               |DIO10  4 27      |                    |      34 14 DIO8 |
+ *               |DIO21  3 28      |                    |      33 13 DIO13|
+ *               |DIO4   2 29 DIO0 |                    |DIO16 32 12 DIO14|
+ *               |DIO5   1 30 DIO1 |                    |DIO17 31 11 DIO15|
+ *               `-----------------'                    `-----------------'
+ *
  * Has:
  *
  *      MX25R8035FZUILO 8Mbit SPI flash
@@ -18,7 +31,6 @@ void io_board_panic (io_t*,int);
 	 .panic = io_board_panic,\
     /**/
 
-
 // red LED
 #define LED_1_BOARD_PIN def_cc2652_io_output_pin (\
         IOID_6,\
@@ -34,6 +46,20 @@ void io_board_panic (io_t*,int);
         IO_PIN_LEVEL_INACTIVE\
     )
 #define LED_2   LED_2_BOARD_PIN.io
+
+// Button 1
+#define BTN1_BOARD_PIN def_cc2652_io_input_pin (\
+      IOID_13,\
+      IO_PIN_ACTIVE_LEVEL_HIGH,\
+      IO_PIN_LEVEL_INACTIVE\
+  )
+
+// Button 2
+#define BTN2_BOARD_PIN def_cc2652_io_input_pin (\
+      IOID_14,\
+      IO_PIN_ACTIVE_LEVEL_HIGH,\
+      IO_PIN_LEVEL_INACTIVE\
+  )
 
 // XDS110 UART
 #define XDS110_UART_TX_DIO      IOID_3
