@@ -50,15 +50,15 @@ void io_board_panic (io_t*,int);
 // Button 1
 #define BTN1_BOARD_PIN def_cc2652_io_input_pin (\
       IOID_13,\
-      IO_PIN_ACTIVE_LEVEL_HIGH,\
-      IO_PIN_LEVEL_INACTIVE\
+		IO_PIN_ACTIVE_LEVEL_LOW,\
+		IOC_IOPULL_UP\
   )
 
 // Button 2
 #define BTN2_BOARD_PIN def_cc2652_io_input_pin (\
       IOID_14,\
-      IO_PIN_ACTIVE_LEVEL_HIGH,\
-      IO_PIN_LEVEL_INACTIVE\
+      IO_PIN_ACTIVE_LEVEL_LOW,\
+		IOC_IOPULL_UP\
   )
 
 // XDS110 UART
